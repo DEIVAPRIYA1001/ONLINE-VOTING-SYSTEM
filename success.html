@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful</title>
+    <style>
+        body {
+            font-family: Cambria, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('bgg.png') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .container {
+            width: 50%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            text-align: center;
+            color: white;
+            animation: sparkleBox 1.5s infinite alternate;
+        }
+
+        h2 {
+            color: #ffcc00;
+            font-size: 28px;
+            text-shadow: 0 0 10px #ffcc00, 0 0 20px #ff7e5f;
+            animation: sparkleText 1.5s infinite alternate;
+        }
+
+        p {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        #selected-candidate {
+            font-weight: bold;
+            font-size: 22px;
+            color: yellow;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .button {
+            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            animation: pulseButton 1.5s infinite alternate;
+        }
+
+        .button:hover {
+            background: linear-gradient(45deg, #feb47b, #ff7e5f);
+            box-shadow: 0 0 15px #ffcc00;
+        }
+
+        /* Animations */
+        @keyframes sparkleBox {
+            0% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); }
+            100% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.9); }
+        }
+
+        @keyframes sparkleText {
+            0% { text-shadow: 0 0 10px #ffcc00, 0 0 20px #ff7e5f; }
+            100% { text-shadow: 0 0 20px #feb47b, 0 0 30px #ffcc00; }
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px yellow; }
+            100% { text-shadow: 0 0 15px yellow; }
+        }
+
+        @keyframes pulseButton {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🎉 Registration Successful! 🎉</h2>
+        <p>You have successfully registered and selected your candidate!</p>
+        <p>Your Selected Candidate: <span id="selected-candidate"></span></p>
+       
+        <div class="button-container">
+            <button class="button" onclick="window.location.href='a.html'">🏠 Back to Home</button>
+            <button class="button" onclick="window.location.href='contact.html'">📞 Contact Us</button>
+        </div>
+    </div>
+
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        function displayCandidateInfo() {
+            const candidate = getQueryParam('candidate');
+            if (candidate) {
+                document.getElementById('selected-candidate').innerText = decodeURIComponent(candidate);
+            } else {
+                document.getElementById('selected-candidate').innerText = "No candidate selected!";
+            }
+        }
+
+        window.onload = displayCandidateInfo;
+    </script>
+</body>
+</html>
+
+
+
+
+
+

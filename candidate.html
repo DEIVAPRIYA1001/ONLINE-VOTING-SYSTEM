@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Selection</title>
+    <style>
+        body {
+            font-family: Cambria, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2C2C2C;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .container {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 55px;
+            border-radius: 20px;
+            box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: bounceIn 1s ease-out;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            color: white;
+            animation: sparkleText 2s infinite alternate;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .search-bar {
+            width: 50%;
+            padding: 10px;
+            font-size: 18px;
+            border: 1px solid #ff7e5f;
+            border-radius: 10px;
+            background-color: #333;
+            color: white;
+            transition: all 0.3s ease;
+            animation: sparkleInput 2s infinite alternate;
+        }
+
+        .search-bar:focus {
+            border-color: #feb47b;
+            box-shadow: 0 0 5px #feb47b, 0 0 10px #feb47b;
+        }
+
+        .search-button {
+            padding: 10px 15px;
+            font-size: 18px;
+            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: sparkleButton 2s infinite alternate;
+        }
+
+        .search-button:hover {
+            background: linear-gradient(45deg, #feb47b, #ff7e5f);
+            box-shadow: 0 0 15px #feb47b;
+        }
+
+        .candidates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 20px;
+        }
+
+        .candidate-card {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            animation: pulseCard 1.5s infinite alternate;
+        }
+
+        .candidate-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #ff7e5f;
+        }
+
+        .candidate-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .candidate-card img:hover {
+            transform: rotate(15deg);
+        }
+
+        .candidate-card h3 {
+            margin: 10px 0;
+            font-size: 20px;
+            color: #ff7e5f;
+        }
+
+        .candidate-card p {
+            color: gray;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .vote-button {
+            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            color: white;
+            padding: 12px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 10px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .vote-button:hover {
+            background: linear-gradient(45deg, #feb47b, #ff7e5f);
+            box-shadow: 0 0 10px #feb47b;
+        }
+
+        /* Animations */
+        @keyframes sparkleText {
+            0% {
+                text-shadow: 0 0 5px #ff7e5f, 0 0 10px #ff7e5f, 0 0 15px #ff7e5f, 0 0 20px #ff7e5f;
+            }
+            50% {
+                text-shadow: 0 0 5px #feb47b, 0 0 10px #feb47b, 0 0 15px #feb47b, 0 0 20px #feb47b;
+            }
+            100% {
+                text-shadow: 0 0 5px #ff7e5f, 0 0 10px #ff7e5f, 0 0 15px #ff7e5f, 0 0 20px #ff7e5f;
+            }
+        }
+
+        @keyframes sparkleInput {
+            0% {
+                border-color: #ff7e5f;
+                box-shadow: 0 0 5px #ff7e5f, 0 0 10px #ff7e5f;
+            }
+            50% {
+                border-color: #feb47b;
+                box-shadow: 0 0 5px #feb47b, 0 0 10px #feb47b;
+            }
+            100% {
+                border-color: #ff7e5f;
+                box-shadow: 0 0 5px #ff7e5f, 0 0 10px #ff7e5f;
+            }
+        }
+
+        @keyframes sparkleButton {
+            0% {
+                background-color: #ff7e5f;
+                box-shadow: 0 0 5px #ff7e5f, 0 0 10px #ff7e5f;
+            }
+            50% {
+                background-color: #feb47b;
+                box-shadow: 0 0 5px #feb47b, 0 0 10px #feb47b;
+            }
+            100% {
+                background-color: #ff7e5f;
+                box-shadow: 0 0 5px #ff7e5f, 0 0 10px #ff7e5f;
+            }
+        }
+
+        @keyframes pulseCard {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <h2>Select Your Candidate</h2>
+        <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+           
+        <div class="search-container">
+            
+            <input type="text" id="search" class="search-bar" placeholder="Enter candidate name...">
+            <button class="search-button" onclick="filterCandidates()">Search</button>
+        </div>
+
+        <div class="candidates-grid" id="candidates-container">
+           
+        </div>
+        
+    </div>
+   
+    <script>
+        const candidates = [
+            { name: "John Doe", party: "Vision Party", region: "New Jersey" },
+            { name: "Jane Smith", party: "Innovate Party", region: "California" },
+            { name: "Bob Johnson", party: "People's Choice", region: "Texas" },
+            { name: "Alice Brown", party: "Progress Party", region: "Florida" },
+            { name: "Mike Davis", party: "Justice League", region: "New York" },
+            { name: "Emily Chen", party: "Freedom Party", region: "Illinois" },
+            { name: "David Lee", party: "Unity Party", region: "Ohio" },
+            { name: "Sarah Taylor", party: "New Future", region: "Pennsylvania" },
+            { name: "Kevin White", party: "Hope Alliance", region: "Michigan" },
+            { name: "Lisa Nguyen", party: "Change Makers", region: "Washington" },
+            { name: "Chris Martin", party: "Green Party", region: "Oregon" },
+            { name: "Patricia Garcia", party: "Liberty Party", region: "Arizona" },
+            { name: "James Wilson", party: "Democratic Party", region: "Virginia" },
+            { name: "Laura Martinez", party: "Republican Party", region: "North Carolina" },
+            { name: "Daniel Robinson", party: "Independent", region: "Georgia" },
+            { name: "Jessica Clark", party: "Socialist Party", region: "Minnesota" },
+            { name: "Matthew Lewis", party: "Libertarian Party", region: "Colorado" },
+            { name: "Angela Hall", party: "Progressive Party", region: "Nevada" },
+            { name: "Brian Young", party: "Constitution Party", region: "Tennessee" },
+            { name: "Samantha King", party: "Reform Party", region: "Missouri" },
+            { name: "Charles Wright", party: "Alliance Party", region: "Kentucky" }
+        ];
+
+        function displayCandidates(candidatesList) {
+            const container = document.getElementById("candidates-container");
+            container.innerHTML = "";
+            if (candidatesList.length === 0) {
+                container.innerHTML = "<p>No candidates found.</p>";
+            }
+
+            candidatesList.forEach(candidate => {
+                const candidateDiv = document.createElement("div");
+                candidateDiv.classList.add("candidate-card");
+                candidateDiv.innerHTML = `
+                    <img src="m.png" alt="${candidate.name}">
+                    <h3>${candidate.name}</h3>
+                    <p>Party: ${candidate.party}</p>
+                    <p>Region: ${candidate.region}</p>
+                    <button class="vote-button" onclick="selectCandidate('${candidate.name}')">Vote</button>
+                `;
+                container.appendChild(candidateDiv);
+            });
+        }
+
+        function filterCandidates() {
+            const searchValue = document.getElementById("search").value.toLowerCase();
+            const filteredCandidates = candidates.filter(candidate => candidate.name.toLowerCase().includes(searchValue));
+            displayCandidates(filteredCandidates);
+        }
+
+        function selectCandidate(candidateName) {
+            // Redirect to success page with the candidate name
+            window.location.href = `success.html?candidate=${encodeURIComponent(candidateName)}`;
+        }
+
+        // Initial display of all candidates
+        displayCandidates(candidates);
+    </script>
+</body>
+</html>
+
+
+

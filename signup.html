@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Voting System - Sign Up</title>
+    <style>
+        body {
+            font-family: 'Cambria', sans-serif;
+            background: url('bgg.png') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .signup-container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px 50px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+            width: 500px;
+            text-align: center;
+            color: white;
+        }
+
+        h2 {
+            font-size: 32px;
+            color: #ffcc00;
+            text-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
+        }
+
+        label {
+            font-size: 20px;
+            color: white;
+            display: block;
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+            width: 93%;
+        }
+
+        input {
+            width: 100%;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 18px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 16px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .login-link {
+            display: block;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #ffcc00;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .login-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        function validateEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function validatePassword(password) {
+            return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(password);
+        }
+
+        function validateForm(event) {
+            event.preventDefault();
+
+            let email = document.getElementById('email').value;
+            let password = document.getElementById('password').value;
+            let confirmPassword = document.getElementById('confirm-password').value;
+
+            if (!validateEmail(email)) {
+                alert("Invalid email format! Email must contain '@' and '.'");
+                return;
+            }
+
+            if (!validatePassword(password)) {
+                alert("Password must contain at least 6 characters, including letters and numbers.");
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                return;
+            }
+
+            alert("Sign-up successful! Redirecting to login page...");
+            window.location.href = "login.html"; // Redirect to login page
+        }
+    </script>
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Create an Account</h2>
+        <form onsubmit="validateForm(event)">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" placeholder="Enter Full Name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter Email ID" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Create Password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" placeholder="Confirm Password" required>
+            </div>
+            <button type="submit">Sign Up</button>
+        </form>
+        <a href="login.html" class="login-link"></a>
+    </div>
+</body>
+</html>

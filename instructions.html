@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Vote</title>
+  <style>
+    body {
+      font-family: Cambria, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('bgg.png') no-repeat center center fixed;
+      background-size: cover;
+      overflow: auto;
+    }
+
+    /* Header styles */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(238, 239, 240, 0.8);
+      padding: 20px;
+      border-bottom: 3px solid #d32f2f;
+    }
+
+    header img {
+      height: 60px;
+      margin-right: 15px;
+      cursor: pointer;
+    }
+
+    header h2 {
+      color: #d32f2f; /* Red heading */
+      font-size: 32px;
+      margin: 0;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: auto;
+      padding: 30px;
+      text-align: center;
+      color: white;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .card {
+      background: white;
+      color: black;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: 0.3s ease;
+      width: 100%;
+      max-width: 700px;
+      font-size: 18px;
+      text-align: left;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+
+    .step-number {
+      color: #d32f2f;
+      font-weight: bold;
+      margin-right: 8px;
+      font-size: 20px;
+    }
+
+    .button-group {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .login-button {
+      display: inline-block;
+      background: #ffcc00;
+      color: black;
+      padding: 12px 25px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s ease;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .login-button:hover {
+      background: #d32f2f;
+      color: white;
+      box-shadow: 0 0 10px #ffcc00;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header with Logo + Heading -->
+  <header>
+    <a href="a.html">
+      <img src="logo.png" alt="Logo">
+    </a>
+    <h2> How to Vote </h2>
+  </header>
+
+  <div class="container">
+    <div class="grid">
+      <div class="card"><span class="step-number">1.</span> Click on the "Go to Login" button below.</div>
+      <div class="card"><span class="step-number">2.</span> Enter your registered email ID and password to log in.</div>
+      <div class="card"><span class="step-number">3.</span> Verify your identity using the OTP sent to your email.</div>
+      <div class="card"><span class="step-number">4.</span> After successful login, proceed to the voting page.</div>
+      <div class="card"><span class="step-number">5.</span> Select your preferred candidate from the list.</div>
+      <div class="card"><span class="step-number">6.</span> Confirm your vote and submit.</div>
+      <div class="card"><span class="step-number">7.</span> You will receive a confirmation message once your vote is successfully cast.</div>
+    </div>
+
+    <div class="button-group">
+      <button class="login-button" onclick="window.location.href='login.html'">Go to Login</button>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Voting System - Login</title>
+    <style>
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes sparkle {
+            0% { text-shadow: 0 0 5px rgba(255, 204, 0, 0.8), 0 0 10px rgba(255, 204, 0, 0.8); }
+            50% { text-shadow: 0 0 20px rgba(255, 204, 0, 1), 0 0 30px rgba(255, 204, 0, 1); }
+            100% { text-shadow: 0 0 5px rgba(255, 204, 0, 0.8), 0 0 10px rgba(255, 204, 0, 0.8); }
+        }
+
+        body {
+            font-family: 'Cambria', sans-serif;
+            background: url('bgg.png') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            animation: zoomIn 1s ease-out;
+        }
+
+        .login-container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px 50px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+            width: 500px;
+            text-align: center;
+            color: white;
+            animation: zoomIn 1s ease-out;
+        }
+
+        h2 {
+            font-size: 32px;
+            color: #ffcc00;
+            text-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
+            animation: sparkle 1.5s infinite alternate;
+        }
+
+        label {
+            font-size: 20px;
+            color: white;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            animation: sparkle 1.5s infinite alternate;
+            margin-bottom: 10px;
+            display: block;
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+            width: 93%;
+        }
+
+        input {
+            width: 100%;
+            padding: 16px;
+            margin-top: 8px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.8);
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+            outline: none;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        button {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 16px;
+            width: 100%;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #e68900;
+            box-shadow: 0 0 15px rgba(255, 152, 0, 0.6);
+        }
+
+        .resend-otp {
+            margin-top: 15px;
+            color: #ffcc00;
+            cursor: pointer;
+            font-weight: bold;
+            display: none;
+            transition: color 0.3s ease-in-out;
+            font-size: 18px;
+        }
+
+        .resend-otp:hover {
+            color: #fff200;
+            text-decoration: underline;
+        }
+
+        .register-button {
+            display: block;
+            margin-top: 20px;
+            background-color: #4caf50;
+            text-decoration: none;
+            padding: 16px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+            font-size: 22px;
+        }
+
+        .register-button:hover {
+            background-color: #45a049;
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.6);
+        }
+
+        #otpDisplay {
+            font-weight: bold;
+            margin-top: 10px;
+            color: #ff5252;
+            font-size: 20px;
+        }
+
+        .login-button {
+            background-color: #FF4500;
+            color: white;
+            font-size: 20px;
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+            animation: bounce 1.5s infinite;
+        }
+
+        .login-button:hover {
+            background-color: #E63946;
+        }
+
+        @keyframes bounce {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .signup-link {
+            display: block;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #07e4a2;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .signup-link:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+    <script>
+        let generatedOTP = null;
+
+        function validateEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function validatePassword(password) {
+            return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(password);
+        }
+
+        function sendOTP(resend = false) {
+            let email = document.getElementById('email').value;
+            let password = document.getElementById('password').value;
+
+            if (!validateEmail(email)) {
+                alert("Invalid email format! Email must contain '@' and '.'");
+                return;
+            }
+
+            if (!validatePassword(password)) {
+                alert("Password must contain at least 6 characters, including letters and numbers.");
+                return;
+            }
+
+            generatedOTP = Math.floor(100000 + Math.random() * 900000);
+            alert("OTP sent: " + generatedOTP); // Simulating OTP sending
+            document.getElementById('otpDisplay').innerText = resend ? 'New OTP has been sent.' : 'OTP has been sent to your email.';
+            document.getElementById('otpSection').style.display = 'block';
+            document.getElementById('resendOTP').style.display = 'block';
+        }
+
+        function verifyOTP() {
+            let enteredOTP = document.getElementById('otp').value;
+
+            if (enteredOTP == generatedOTP) {
+                alert("Login successful!");
+            } else {
+                alert("Wrong OTP! Please re-enter the correct OTP.");
+                document.getElementById('otp').value = '';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login to Vote</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter Email ID" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter Password" required>
+            </div>
+
+            <button type="button" onclick="sendOTP()">Send OTP</button>
+            <div id="otpSection" style="display: none;">
+                <div class="form-group">
+<BR>
+                    <label for="otp">OTP</label>
+                    <input type="text" id="otp" placeholder="Enter OTP" required>
+                </div>
+                <button type="button" onclick="verifyOTP()">Verify OTP</button>
+                <p id="otpDisplay"></p>
+                <p id="resendOTP" class="resend-otp" onclick="sendOTP(true)">Resend OTP</p>
+            </div>
+        </form>
+        <a href="register.html" class="register-button">Register Here</a>
+        <a href="signup.html" class="signup-link">Don't have an account?  Sign Up</a>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        body {
+            font-family: Cambria, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('bgg.png') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 50%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            text-align: center;
+            color: white;
+        }
+
+        h2 {
+            color: #ffcc00;
+            font-size: 28px;
+            text-shadow: 0 0 10px #ffcc00, 0 0 20px #ff7e5f;
+        }
+
+        .contact-info {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .contact-info a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .contact-info a:hover {
+            color: #feb47b;
+            text-shadow: 0 0 10px #ffcc00;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #ffcc00;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ffcc00;
+            border-radius: 8px;
+            background-color: #333;
+            color: white;
+            box-shadow: 0 0 5px #ffcc00;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #feb47b;
+            box-shadow: 0 0 10px #feb47b, 0 0 20px #ffcc00;
+        }
+
+        .button {
+            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background: linear-gradient(45deg, #feb47b, #ff7e5f);
+            box-shadow: 0 0 15px #ffcc00;
+        }
+
+        .back-button {
+            margin-top: 20px;
+            display: inline-block;
+            background: #ffcc00;
+            color: black;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #feb47b;
+            color: white;
+            box-shadow: 0 0 10px #ffcc00;
+        }
+
+        .notification {
+            display: none;
+            background: #28a745;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            box-shadow: 0 0 10px #28a745;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📞 Contact Us</h2>
+       
+        <div class="contact-info">
+            <p>📞 Phone: <a href="tel:+1234567890">+1 234 567 890</a></p>
+            <p>📧 Email: <a href="mailto:contact@example.com">voting system@gmail.com</a></p>
+            <p>📷 Instagram: <a href="https://www.instagram.com/your_instagram" target="_blank">@online_voting system</a></p>
+        </div>
+
+        <form onsubmit="sendMessage(event)">
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Your Message</label>
+                <textarea id="message" name="message" rows="4" placeholder="Type your message here..." required></textarea>
+            </div>
+
+            <button type="submit" class="button">🚀 Send Message</button>
+        </form>
+
+        <div id="notification" class="notification">
+            ✅ Your message has been sent!
+        </div>
+
+        <a href="a.html" class="back-button">🏠 Back to Home</a>
+    </div>
+
+    <script>
+        function sendMessage(event) {
+            event.preventDefault(); // Prevents form submission
+            document.getElementById("notification").style.display = "block";
+            setTimeout(() => {
+                document.getElementById("notification").style.display = "none";
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
